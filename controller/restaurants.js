@@ -1,83 +1,80 @@
-const Restaurants = require('../models/Restaurants');
 const express = require('express');
 const router = express.Router();
+const {Restaurant} = require('../models');
 
-router.get('/', async (req, res, next) => {
+router.get('/restaurants', async (req, res, next) => {
     try {
-        const restaurants = await Restaurants.getRestaurants();
+        const restaurants = await Restaurant.findAll();
         res.json(restaurants);
     }
-    catch (e) {
+    catch(e) {
         next(e);
     }
 });
 
-router.get('/:id', async (req, res, next) => {
-    try {
-        const restaurant = await Restaurants.getRestaurant(req.params.id);
-        res.json(restaurant);
+router.get('/restaurants/:id', async (req, res, next) => {
+    if (!isNaN(req.params.id)){
+        try {
+            const restaurant = await Restaurant.findById(req.params.id);
+            res.json(restaurant);
+        }
+        catch(e) {
+            next(e);
+        }
     }
-    catch (e) {
+    else{
+        next(new Error("Mauvais ID : '" + req.params.id + "'"))
+    }
+});
+
+router.post('/restaurants', async (req, res, next) => {
+    try {
+        const postRestaurant = await Restaurant.create({
+            'name': req.body.name,
+            'address': req.body.address,
+            'capacity': req.body.capacity
+        });
+        res.json(postRestaurant);
+    }
+    catch(e) {
         next(e);
     }
 });
 
-router.get('/:restaurantId/employees', async (req, res, next) => {
-    try {
-        const employees = await Restaurants.getEmployeeFromRestaurant(req.params.restaurantId);
-        res.json(employees);
+router.put('/restaurants/:id', async (req, res, next) => {
+    if (!isNaN(req.params.id)){
+        try {
+            const updateRestaurant = await Restaurant.update({
+                'name': req.body.name,
+                'address': req.body.address,
+                'capacity': req.body.capacity
+                },
+                {where: {id:req.params.id}});
+                const {lastId} = updateRestaurant;
+                const newUpdateRestaurant = {lastId};
+            res.json(newUpdateRestaurant);
+        }
+        catch(e) {
+            next(e)
+        }
     }
-    catch (e) {
-        next(e);
-    }
-});
-
-router.get('/:restaurantId/menus', async (req, res, next) => {
-    try {
-        const menus = await Restaurants.getMenusFromRestaurant(req.params.restaurantId);
-        res.json(menus);
-    }
-    catch (e) {
-        next(e);
-    }
-});
-
-router.post('/', async (req, res, next) => {
-    try {
-        await Restaurants.postRestaurant(
-            req.body.address,
-            req.body.name,
-            req.body.capacity
-        );
-        res.sendStatus(201);
-    }
-    catch (e) {
-        next(e)
+    else{
+        next(new Error("Mauvais ID : '" + req.params.id + "'"))
     }
 });
 
-router.put('/:id', async (req, res, next) => {
-    try {
-        await Restaurants.putRestaurant(
-            req.body.address,
-            req.body.name,
-            req.body.capacity,
-            req.params.id
-        );
-        res.sendStatus(200);
+router.delete('/restaurants/:id', async (req, res, next) => {
+    if (!isNaN(req.params.id)){
+        try {
+            const deleteRestaurant = await Restaurant.destroy({where: {id: req.params.id}});
+            res.json(deleteRestaurant);
+        }
+        catch(e){
+            next(e);
+        }
     }
-    catch (e) {
-        next(e)
-    }
-});
-
-router.delete('/:id', async (req, res, next) => {
-    try {
-        await Restaurants.deleteRestaurant(req.params.id);
-        res.sendStatus(202);
-    }
-    catch (e) {
-        next(e);
+    else{
+        next(new Error("Mauvais ID : '" + req.params.id + "'"))
     }
 });
 

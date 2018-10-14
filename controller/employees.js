@@ -1,75 +1,78 @@
-const Employees = require('../models/Employees');
 const express = require('express');
 const router = express.Router();
-const { getRestaurant } = require('../models/Restaurants');
+const {Employee} = require('../models');
 
-router.get('/', async (req, res, next) => {
-    try {
-        res.json(await Employees.getEmployees());
+router.get('/:restaurantsId/employees', async (req, res, next) => {
+    if (!isNaN(req.params.restaurantsId)){
+        try {
+            const employees = await Employee.findAll();
+            res.json(employees);
+        }
+        catch(e) {
+            next(e.message);
+        }
     }
-    catch (e) {
-        next(e);
+    else{
+        next(new Error("Mauvais ID : '" + req.params.restaurantsId + "'"))
     }
 });
 
-router.get('/:id', async (req, res, next) => {
-    try {
-        const employee = await Employees.getEmployee(req.params.id);
-        res.json(employee);
+router.post('/employees', async (req, res, next) => {
+        try {
+        const postEmployee = await Employee.create(req.body);
+        res.json(postEmployee);
+        }
+        catch(e) {
+            next(e.message);
+        }
+})
+
+router.get('/employees/:id', async (req, res, next) => {
+    if (!isNaN(req.params.id)){
+        try {
+            const employee = await Employee.findById(req.params.id);
+            res.json(employee);
+        }
+        catch(e) {
+            next(e.message);
+        }
     }
-    catch (e) {
-        next(e);
+    else{
+        next(new Error("Mauvais ID : '" + req.params.id + "'"))
     }
 });
 
-router.post('/', async (req, res, next) => {
-    try {
-        const restaurant = await getRestaurant(req.body.restaurantId);
-        if (restaurant !== undefined) {
-            await Employees.postEmployee(
-                req.body.name,
-                req.body.restaurantId,
-                req.body.position
-            );
-            res.sendStatus(201);
+router.put('/employees/:id', async (req, res, next) => {
+    if (!isNaN(req.params.id)){
+        try {
+            const updateEmployee = await Employee.update(req.body, {
+                where: {id:req.params.id}
+            });
+            res.json(updateEmployee)
         }
-        else {
-            throw new Error('Le restaurant n\'existe pas');
+        catch(e) {
+            next(e.message);
         }
     }
-    catch (e) {
-        next(e.message);
+    else{
+        next(new Error("Mauvais ID : '" + req.params.id + "'"))
     }
 });
 
-router.put('/:id', async (req, res, next) => {
-    try {
-        const restaurant = await getRestaurant(req.body.restaurantId);
-        if (restaurant !== undefined) {
-            await Employees.putEmployee(
-                req.body.name,
-                req.body.restaurantId,
-                req.body.position,
-                req.params.id
-            );
-            res.sendStatus(200);
+router.delete('/employees/:id', async (req, res, next) => {
+    if (!isNaN(req.params.id)){
+        try {
+            const deleteEmployee = await Employee.destroy({
+                where: {id: req.params.id}
+            });
+            res.json(deleteEmployee)
         }
-        else {
-            throw new Error('Le restaurant n\'existe pas');
+        catch(e) {
+            next(e.message);
         }
     }
-    catch (e) {
-        next(e.message);
-    }
-});
-
-router.delete('/:id', async (req, res, next) => {
-    try {
-        await Employees.deleteEmployee(req.params.id);
-        res.sendStatus(202);
-    }
-    catch (e) {
-        next(e);
+    else{
+        next(new Error("Mauvais ID : '" + req.params.id + "'"))
     }
 });
 

@@ -1,67 +1,83 @@
-const Menu = require('../models/Menu');
 const express = require('express');
 const router = express.Router();
-const { getRestaurant } = require('../models/Restaurants');
+const {Menu} = require('../models');
 
-router.get('/', async (req, res, next) => {
-    try {
-        res.json(await Menu.getMenus());
-    }
-    catch (e) {
-        next(e);
-    }
-});
-
-router.get('/:id', async (req, res, next) => {
-    try {
-        const menu = await Menu.getMenu(req.params.id);
-        res.json(menu);
-    }
-    catch (e) {
-        next(e);
-    }
-});
-
-router.post('/', async (req, res, next) => {
-    try {
-        await Menu.postMenu(
-            req.body.name,
-            req.body.restaurantId,
-        );
-        res.sendStatus(201);
-    }
-    catch (e) {
-        next(e);
-    }
-});
-
-router.put('/:id', async (req, res, next) => {
-    try {
-        const restaurant = await getRestaurant(req.body.restaurantId);
-        if (restaurant !== undefined) {
-            await Menu.putMenu(
-                req.body.name,
-                req.body.restaurantId,
-                req.params.id
-            );
-            res.sendStatus(200);
+router.get('/:restaurantsId/menu', async (req, res, next) => {
+    if (!isNaN(req.params.restaurantsId)){
+        try {
+            const menus = await Menu.findAll();
+            res.json(menus);
         }
-        else {
-            throw new Error('Le restaurant n\'existe pas');
+        catch(e) {
+            next(e.message);
         }
     }
-    catch (e) {
-        next(e.message);
+    else{
+        next(new Error("Mauvais ID : '" + req.params.restaurantsId + "'"))
     }
 });
 
-router.delete('/:id', async (req, res, next) => {
-    try {
-        await Menu.deleteMenu(req.params.id);
-        res.sendStatus(202);
+router.post('/menu', async (req, res, next) => {
+    if (!isNaN(req.params.id)){
+     try {
+         const postMenu = await Menu.create(req.body);
+         res.json(postMenu);
+     }
+     catch(e) {
+         next(e.message);
+     }
     }
-    catch (e) {
-        next(e);
+  else{
+        next(new Error("Mauvais ID : '" + req.params.id + "'"))
+    }
+});
+
+router.get('/menu/:id', async (req, res, next) => {
+    if (!isNaN(req.params.id)){
+        try {
+            const menu = await Menu.findById(req.params.id);
+            res.json(menu);
+        }
+        catch(e) {
+            next(e.message);
+        }
+    }
+    else{
+        next(new Error("Mauvais ID : '" + req.params.id + "'"))
+    }
+});
+
+router.put('/menu/:id', async (req, res, next) => {
+    if (!isNaN(req.params.id)){
+        try {
+            const updateMenu =  await Menu.update(req.body, {
+             where: {id:req.params.id}
+          });
+          res.json(updateMenu);
+        }
+        catch(e) {
+          next(e.message);
+        }
+    }
+    else{
+        next(new Error("Mauvais ID : '" + req.params.id + "'"))
+    }
+});
+
+router.delete('/menu/:id', async (req, res, next) => {
+    if (!isNaN(req.params.id)){
+        try {
+            const deleteMenu = await Menu.destroy({
+               where: {id:req.params.id}
+            });
+            res.json(deleteMenu);
+        }
+        catch(e) {
+           next(e.message);
+        }
+    }
+    else{
+        next(new Error("Mauvais ID : '" + req.params.id + "'"))
     }
 });
 
