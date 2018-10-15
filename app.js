@@ -6,14 +6,14 @@ const employees = require('./controller/employees');
 const menu = require('./controller/menu');
 const {sequelize} = require('./models/index');
 
-sequelize.sync().then(res => console.log(res));
+sequelize.sync().then(res => res);
 
 app.use(bodyParser.json());
 app.use('/', restaurants);
 app.use('/', employees);
 app.use('/', menu);
 
-const port = 3000
+const port = 3004
 app.listen(port, () => {
     console.log(`Running on http://localhost:${port}`)
 })

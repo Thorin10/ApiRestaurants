@@ -1,12 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const {Menu} = require('../models');
+const {Restaurant} = require('../models');
 
-router.get('/:restaurantsId/menu', async (req, res, next) => {
-    if (!isNaN(req.params.restaurantsId)){
-        try {
-            const menus = await Menu.findAll();
-            res.json(menus);
+router.get('/:restaurantId/menu', async (req, res, next) => {
+    if (!isNaN(req.params.restaurantId)){
+        try { 
+            const restaurant = await Restaurant.findById(req.params.restaurantId)
+            if (restaurant != null){
+                const menu = await Menu.findAll({
+                    where: {restaurantId: req.params.restaurantId}});
+                res.json(menu)
+            }
+            else {
+                res.send("Error: Le restaurant n'existe pas")
+            }
         }
         catch(e) {
             next(e.message);
@@ -18,17 +26,12 @@ router.get('/:restaurantsId/menu', async (req, res, next) => {
 });
 
 router.post('/menu', async (req, res, next) => {
-    if (!isNaN(req.params.id)){
-     try {
-         const postMenu = await Menu.create(req.body);
-         res.json(postMenu);
-     }
-     catch(e) {
-         next(e.message);
-     }
+    try {
+        const postMenu = await Menu.create(req.body);
+        res.json(postMenu);
     }
-  else{
-        next(new Error("Mauvais ID : '" + req.params.id + "'"))
+    catch(e) {
+        next(e.message);
     }
 });
 

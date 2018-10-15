@@ -1,12 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const {Employee} = require('../models');
+const {Restaurant} = require('../models');
 
-router.get('/:restaurantsId/employees', async (req, res, next) => {
-    if (!isNaN(req.params.restaurantsId)){
+router.get('/:restaurantId/employees', async (req, res, next) => {
+    if (!isNaN(req.params.restaurantId)){
         try {
-            const employees = await Employee.findAll();
-            res.json(employees);
+            const restaurant = await Restaurant.findById(req.params.restaurantId)
+            if (restaurant != null){
+                const employees = await Employee.findAll({
+                    where: {restaurantId: req.params.restaurantId}});
+                console.log(employees)
+                res.json(employees)
+            }
+            else {
+                res.send("Error: Le restaurant n'existe pas")
+            }
         }
         catch(e) {
             next(e.message);

@@ -9,6 +9,7 @@ const sequelize = new Sequelize('mainDb', null, null, {
 const Restaurant = sequelize.import(__dirname + '/Restaurants');
 const Employee = sequelize.import(__dirname + '/Employees');
 const Menu = sequelize.import(__dirname + '/Menu');
+
 Employee.restaurant = Employee.belongsTo(Restaurant);
 Menu.restaurant = Menu.belongsTo(Restaurant);
 Restaurant.employees = Restaurant.hasMany(Employee);
