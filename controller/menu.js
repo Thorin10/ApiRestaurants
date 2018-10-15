@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {Menu} = require('../models');
+const {Restaurant} = require('../models);
 
 router.get('/:restaurantsId/menu', async (req, res, next) => {
     if (!isNaN(req.params.restaurantsId)){
