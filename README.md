@@ -21,7 +21,7 @@ Voici la liste des routes de l'application.
 Certaines actions décrites se font en HTML et renvoient un **"message"** en Json. 
 
 | Route | Méthode | Retour |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | /restaurants | GET | Les restaurants |
 | /restaurant/:id | GET | Le restaurant correspondant à l'id |
 | /restaurant | POST | Ajoute un restaurant |
@@ -38,5 +38,5 @@ Certaines actions décrites se font en HTML et renvoient un **"message"** en Jso
 | /menu/:id | PUT | Modifie le menu correspondant à l'id |
 | /menu/:id | DELETE | Supprime le menu |
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMzE2NjAyNTVdfQ==
+eyJoaXN0b3J5IjpbMTE2NzgzMjA4OCwtMjEzMTY2MDI1NV19
 -->
