@@ -12,7 +12,7 @@ router.get('/restaurants', async (req, res, next) => {
     }
 });
 
-router.get('/restaurants/:id', async (req, res, next) => {
+router.get('/restaurant/:id', async (req, res, next) => {
     if (!isNaN(req.params.id)){
         try {
             const restaurant = await Restaurant.findById(req.params.id);
@@ -27,7 +27,7 @@ router.get('/restaurants/:id', async (req, res, next) => {
     }
 });
 
-router.post('/restaurants', async (req, res, next) => {
+router.post('/restaurant', async (req, res, next) => {
     try {
         const postRestaurant = await Restaurant.create({
             'name': req.body.name,
@@ -41,7 +41,7 @@ router.post('/restaurants', async (req, res, next) => {
     }
 });
 
-router.put('/restaurants/:id', async (req, res, next) => {
+router.put('/restaurant/:id', async (req, res, next) => {
     if (!isNaN(req.params.id)){
         try {
             const updateRestaurant = await Restaurant.update({
@@ -63,7 +63,7 @@ router.put('/restaurants/:id', async (req, res, next) => {
     }
 });
 
-router.delete('/restaurants/:id', async (req, res, next) => {
+router.delete('/restaurant/:id', async (req, res, next) => {
     if (!isNaN(req.params.id)){
         try {
             const deleteRestaurant = await Restaurant.destroy({where: {id: req.params.id}});
