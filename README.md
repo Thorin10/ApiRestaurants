@@ -17,8 +17,7 @@ node app.js
 
 ### Routes
 
-Voici la liste des routes de l'application.   
-Certaines actions décrites se font en HTML et renvoient un **"message"** en Json. 
+Voici la liste des routes de l'application.    
 
 | Route | Méthode | Retour |
 | --- | --- | --- |
