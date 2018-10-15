@@ -38,14 +38,7 @@ Certaines actions décrites se font en HTML et renvoient un **"message"** en Jso
 | /menu/:id | PUT | Modifie le menu correspondant à l'id
 | /menu/:id | DELETE | Supprime le menu
 
- | array-operations   | Common Lisp                     |
- | ------------------ | ------------------------------- |
- | size               | array-total-size                |
- | rank               | array-rank                      |
- | dim                | array-dimension                 |
- | dims               | array-dimensions                |
- | nrow               | *number of rows in matrix*      |
- | ncol               | *number of columns in matrix*   |
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc0MjkxNDU2LC0xMTY0NzEzNDA0XX0=
+eyJoaXN0b3J5IjpbMTY3MjMwOTY4MywtNzQyOTE0NTYsLTExNj
+Q3MTM0MDRdfQ==
 -->
