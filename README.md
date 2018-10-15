@@ -27,9 +27,9 @@ Certaines actions décrites se font en HTML et renvoient un **"message"** en Jso
 | /restaurant | POST | Ajoute un restaurant
 | /restaurant/:id | PUT | Modifie le restaurant correspondant à l'id
 | /restaurant/:id | DELETE | Supprime le restaurant
-| /:restaurantId/employees | GET  | L'employé correspondant au restaurant
+| /:restaurantId/employees | GET | L'employé correspondant au restaurant
 | /employee/:id | GET | L'employé correspondant à l'id
-| /employee | POST | Ajoute un employé
+| /employees | POST | Ajoute un employé
 | /employee/:id | PUT | Modifie l'employé correspondant à l'id
 | /employee/:id | DELETE | Supprime l'employé
 | /:restaurantId/menu | GET | Le menu correspondant au restaurant
@@ -37,3 +37,7 @@ Certaines actions décrites se font en HTML et renvoient un **"message"** en Jso
 | /menu | POST | Ajoute un menu
 | /menu/:id | PUT | Modifie le menu correspondant à l'id
 | /menu/:id | DELETE | Supprime le menu
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTY3MjMwOTY4M119
+-->
