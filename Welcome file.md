@@ -26,19 +26,20 @@ Certaines actions décrites se font en HTML et renvoient un **"message"** en Jso
 | /restaurant/:id | GET | Le restaurant correspondant à l'id
 | /restaurant | POST | Ajoute un restaurant
 | /restaurant/:id | PUT | Modifie le restaurant correspondant à l'id
-| /restaurant/:id | DELETE  | Supprime le restaurant
-| /:restaurantId/employees | GET  | L'employé correspondant au restaurant
-| /employee/:id | GET  | L'employé correspondant à l'id
-| /employees | POST  | Ajoute un employé
-| /employee/:id | PUT  | Modifie l'employé correspondant à l'id
-| /employee/:id | DELETE  | Supprime l'employé
-| /:restaurantId/menu | GET  | Le menu correspondant au restaurant
-| /menu/:id | GET  | Le menu correspondant à l'id
-| /menu | POST  | Ajoute un menu
-| /menu/:id | PUT  | Modifie le menu correspondant à l'id
-| /menu/:id | DELETE  | Supprime le menu
+| /restaurant/:id | DELETE | Supprime le restaurant
+| /:restaurantId/employees | GET | L'employé correspondant au restaurant
+| /employee/:id | GET | L'employé correspondant à l'id
+| /employees | POST | Ajoute un employé
+| /employee/:id | PUT | Modifie l'employé correspondant à l'id
+| /employee/:id | DELETE | Supprime l'employé
+| /:restaurantId/menu | GET | Le menu correspondant au restaurant
+| /menu/:id | GET | Le menu correspondant à l'id
+| /menu | POST | Ajoute un menu
+| /menu/:id | PUT | Modifie le menu correspondant à l'id
+| /menu/:id | DELETE | Supprime le menu
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDYzMDc3ODMsLTExNjQ3MTM0MDRdfQ==
+eyJoaXN0b3J5IjpbLTE0ODk1NDQ5MjcsLTExNjQ3MTM0MDRdfQ
+==
 -->
