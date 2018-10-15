@@ -5,8 +5,14 @@ const {Menu} = require('../models');
 router.get('/:restaurantsId/menu', async (req, res, next) => {
     if (!isNaN(req.params.restaurantsId)){
         try {
-            const menus = await Menu.findAll();
-            res.json(menus);
+            const restaurant = await Restaurant.findById(req.params.restaurantId)
+            if (restaurant != null){
+                const menus = await Menu.findAll({where: {restaurantId: req.params.restaurantId}});
+                res.json(menus);
+            }
+            else{
+                next(new Error("Aucun restaurant correspondant '" + req.params.restaurantId + "'"))
+            }
         }
         catch(e) {
             next(e.message);

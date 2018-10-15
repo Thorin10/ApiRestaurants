@@ -1,12 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const {Employee} = require('../models');
+const {Restaurant} = require('../models');
 
 router.get('/:restaurantId/employees', async (req, res, next) => {
     if (!isNaN(req.params.restaurantId)){
         try {
-            const employees = await Employee.findAll();
-            res.json(employees);
+            const restaurant = await Restaurant.findById(req.params.restaurantId)
+            if (restaurant != null){
+                const employees = await Employee.findAll({where: {restaurantId: req.params.restaurantId}});
+                res.json(employees);
+            }
+            else{
+                next(new Error("Aucun restaurant correspondant '" + req.params.restaurantId + "'"))
+            }
         }
         catch(e) {
             next(e.message);
@@ -42,7 +49,7 @@ router.get('/employee/:id', async (req, res, next) => {
     }
 });
 
-router.put('/employees/:id', async (req, res, next) => {
+router.put('/employee/:id', async (req, res, next) => {
     if (!isNaN(req.params.id)){
         try {
             const updateEmployee = await Employee.update(req.body, {
