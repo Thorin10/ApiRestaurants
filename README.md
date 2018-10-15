@@ -29,7 +29,7 @@ Certaines actions décrites se font en HTML et renvoient un **"message"** en Jso
 | /restaurant/:id | DELETE | Supprime le restaurant |
 | /:restaurantId/employees | GET | L'employé correspondant au restaurant |
 | /employee/:id | GET | L'employé correspondant à l'id |
-| /employees | POST | Ajoute un employé |
+| /employee | POST | Ajoute un employé |
 | /employee/:id | PUT | Modifie l'employé correspondant à l'id |
 | /employee/:id | DELETE | Supprime l'employé |
 | /:restaurantId/menu | GET | Le menu correspondant au restaurant |
