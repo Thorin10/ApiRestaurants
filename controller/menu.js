@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {Menu} = require('../models');
+const {Restaurant} = require('../models');
 
 router.get('/:restaurantsId/menu', async (req, res, next) => {
     if (!isNaN(req.params.restaurantsId)){
@@ -11,7 +12,7 @@ router.get('/:restaurantsId/menu', async (req, res, next) => {
                 res.json(menus);
             }
             else{
-                next(new Error("Aucun restaurant correspondant '" + req.params.restaurantId + "'"))
+                next(new Error("Aucun restaurant correspondant'" + req.params.restaurantId + "'"))
             }
         }
         catch(e) {
@@ -24,17 +25,12 @@ router.get('/:restaurantsId/menu', async (req, res, next) => {
 });
 
 router.post('/menu', async (req, res, next) => {
-    if (!isNaN(req.params.id)){
-     try {
-         const postMenu = await Menu.create(req.body);
-         res.json(postMenu);
-     }
-     catch(e) {
-         next(e.message);
-     }
+    try {
+        const postMenu = await Menu.create(req.body);
+        res.json(postMenu);
     }
-  else{
-        next(new Error("Mauvais ID : '" + req.params.id + "'"))
+    catch(e) {
+        next(e.message);
     }
 });
 

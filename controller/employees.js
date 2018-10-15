@@ -25,13 +25,13 @@ router.get('/:restaurantId/employees', async (req, res, next) => {
 });
 
 router.post('/employee', async (req, res, next) => {
-        try {
+    try {
         const postEmployee = await Employee.create(req.body);
         res.json(postEmployee);
-        }
-        catch(e) {
-            next(e.message);
-        }
+    }
+    catch(e) {
+        next(e.message);
+    }
 })
 
 router.get('/employee/:id', async (req, res, next) => {

@@ -13,7 +13,7 @@ app.use('/', restaurants);
 app.use('/', employees);
 app.use('/', menu);
 
-const port = 3000
+const port = 8080
 app.listen(port, () => {
     console.log(`Running on http://localhost:${port}`)
 })
