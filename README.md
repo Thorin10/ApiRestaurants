@@ -23,7 +23,9 @@ Certaines actions décrites se font en HTML et renvoient un **"message"** en Jso
 
 | Route | Méthode | Retour |
 | --- | --- | --- | --- |
+
 | /restaurants | GET | Les restaurants
+
 | /restaurant/:id | GET | Le restaurant correspondant à l'id
 | /restaurant | POST | Ajoute un restaurant
 | /restaurant/:id | PUT | Modifie le restaurant correspondant à l'id
