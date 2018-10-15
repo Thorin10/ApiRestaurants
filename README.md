@@ -37,7 +37,3 @@ Certaines actions décrites se font en HTML et renvoient un **"message"** en Jso
 | /menu | POST | Ajoute un menu
 | /menu/:id | PUT | Modifie le menu correspondant à l'id
 | /menu/:id | DELETE | Supprime le menu
-
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY3MjMwOTY4M119
--->
