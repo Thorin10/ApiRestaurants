@@ -3,8 +3,8 @@ const router = express.Router();
 const {Menu} = require('../models');
 const {Restaurant} = require('../models');
 
-router.get('/:restaurantsId/menu', async (req, res, next) => {
-    if (!isNaN(req.params.restaurantsId)){
+router.get('/:restaurantId/menu', async (req, res, next) => {
+    if (!isNaN(req.params.restaurantId)){
         try {
             const restaurant = await Restaurant.findById(req.params.restaurantId)
             if (restaurant != null){
@@ -20,7 +20,7 @@ router.get('/:restaurantsId/menu', async (req, res, next) => {
         }
     }
     else{
-        next(new Error("Mauvais ID : '" + req.params.restaurantsId + "'"))
+        next(new Error("Mauvais ID : '" + req.params.restaurantId + "'"))
     }
 });
 
